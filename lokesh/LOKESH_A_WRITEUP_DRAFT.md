@@ -1,6 +1,6 @@
 # Lokesh — handwritten Section A content guide
 
-This is source text and calculations to **rewrite by hand** for Question 20A. The PDF's literal wording says each student puts their name and signature on every page; arrange for **all four members to sign each handwritten page** before scanning. Insert the generated figures in the appropriate places. Replace any assumptions if the integrated project changes them. Do not present provisional adaptation thresholds or uncollected field data as validated results.
+This is source text and calculations to **rewrite by hand** for Question 20A. Paths below are relative to the repository root. The PDF's literal wording says each student puts their name and signature on every page; arrange for **all four members to sign each handwritten page** before scanning. Insert the generated figures in the appropriate places. Replace any assumptions if the integrated project changes them. Do not present provisional adaptation thresholds or uncollected field data as validated results.
 
 ## 1. Aim and transmitter architecture
 
@@ -49,7 +49,7 @@ The complete frame waveform is scaled so its average `|x[n]|²` equals `10^((15�
 
 ## 5. Figures and measurement link
 
-Insert `figures/tx_resource_mapping.png` and `figures/tx_spectrum.png`. Describe pilots, empty DC/guards and occupied bandwidth. Soukaryo will provide original three-location Wi-Fi RSSI data. Explain how its trend is used to check/calibrate Prisha's path-loss parameter. Do not insert or describe any field value until it is actually measured. The phone's Wi-Fi waveform need not match this generic simulated OFDM waveform; the measurement validates a propagation/link trend.
+Insert `lokesh/figures/tx_resource_mapping.png` and `lokesh/figures/tx_spectrum.png`. Describe pilots, empty DC/guards and occupied bandwidth. Soukaryo will provide original three-location Wi-Fi RSSI data. Explain how its trend is used to check/calibrate Prisha's path-loss parameter. Do not insert or describe any field value until it is actually measured. The phone's Wi-Fi waveform need not match this generic simulated OFDM waveform; the measurement validates a propagation/link trend.
 
 ## 6. Functional validation and limitations
 

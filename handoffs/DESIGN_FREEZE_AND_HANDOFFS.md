@@ -1,6 +1,6 @@
 # Question 20 design freeze and executable handoffs
 
-**Decided by Lokesh for the group on 17 October 2026.** Use this file as the shared specification for A/B/C/D. Each member still owns and writes their complete assigned sub-question. The two assignment PDFs in the repository are authoritative for grading and submission. These settings are a reproducible engineering **baseline**, not claims that the measured access point has these characteristics. Preserve raw field data and label assumptions in every plot/table.
+**Decided by Lokesh for the group on 17 October 2026.** Use this file as the shared specification for A/B/C/D. Paths here are relative to the repository root. Each member still owns and writes their complete assigned sub-question. The two assignment PDFs in the repository are authoritative for grading and submission. These settings are a reproducible engineering **baseline**, not claims that the measured access point has these characteristics. Preserve raw field data and label assumptions in every plot/table.
 
 ## 1. System and protocol — fixed now
 

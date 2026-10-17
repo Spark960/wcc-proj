@@ -9,6 +9,11 @@ Desktop.ini
 *.swp
 *.swo
 
+# MATLAB temporary files
+*.asv
+*.autosave
+slprj/
+
 # Logs and temporary files
 *.log
 logs/

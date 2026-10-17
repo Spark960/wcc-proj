@@ -1,6 +1,6 @@
 # Lokesh's transmitter: value justifications and assignment audit
 
-**Audit date:** 17 October 2026. **Scope:** Question 20A and its interface to the rest of Question 20. The two assignment PDFs in this folder have the same Question 20 technical text, but different FISAC submission instructions and deadlines. This document separates what the PDFs require from what we chose for the prototype. The MATLAB code is a **generic, WLAN-inspired OFDM link**, not an IEEE 802.11-compliant Wi-Fi transmitter or a deployed cellular radio.
+**Audit date:** 17 October 2026. **Scope:** Question 20A and its interface to the rest of Question 20. Paths below are relative to the repository root. The two assignment PDFs in the repository root have the same Question 20 technical text, but different FISAC submission instructions and deadlines. This document separates what the PDFs require from what we chose for the prototype. The MATLAB code is a **generic, WLAN-inspired OFDM link**, not an IEEE 802.11-compliant Wi-Fi transmitter or a deployed cellular radio.
 
 ## What the PDFs actually require
 
@@ -46,7 +46,7 @@ MathWorks references for the WLAN-like 20 MHz/64/16/48/4 geometry and timing: [n
 
 ## What was actually verified in MATLAB R2026b
 
-On 17 October 2026, `code/checkLokeshTx.m` and `code/runLokeshTx.m` completed without error in the installed MATLAB R2026b. The checks covered the CRC-16 known vector; deterministic waveform from identical seeds/configuration; expected QPSK/16-QAM/64-QAM frame lengths; configured mean waveform power; clean, zero-impairment OFDM recovery of header, payload and CRC; and the raw/frame rate table. Figures `figures/tx_resource_mapping.png` and `figures/tx_spectrum.png` were generated.
+On 17 October 2026, `code/checkLokeshTx.m` and `code/runLokeshTx.m` completed without error in the installed MATLAB R2026b. The checks covered the CRC-16 known vector; deterministic waveform from identical seeds/configuration; expected QPSK/16-QAM/64-QAM frame lengths; configured mean waveform power; clean, zero-impairment OFDM recovery of header, payload and CRC; and the raw/frame rate table. Figures `lokesh/figures/tx_resource_mapping.png` and `lokesh/figures/tx_spectrum.png` were generated.
 
 **Verification boundary:** `txIdealLoopback.m` knows the frame boundary and uses a flat pilot gain. It is a transmitter sanity check, **not** Abhinav's required receiver. The transmitter spectrum is an uncalibrated relative-power plot of one frame, **not** a regulatory spectral-mask or measured RF spectrum. The field Wi-Fi app has not measured our generated complex baseband signal; it can support a path-loss/RSSI trend comparison only after actual field readings are recorded and model assumptions are stated.
 

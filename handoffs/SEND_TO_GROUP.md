@@ -1,6 +1,6 @@
 # Message to send with the repository link
 
-> I have fixed our Question 20 design and interfaces in the repo. Please pull the latest `main`, read `README.md` and `DESIGN_FREEZE_AND_HANDOFFS.md`, then read your named instruction file. Keep all numerical settings in `code/getConfig.m` so our sections match. The values for indoor loss, interference and power are labeled assumptions until checked against real measurements.
+> I have fixed our Question 20 design and interfaces in the repo: https://github.com/Spark960/wcc-proj . Please pull the latest `main`, read `README.md` and `handoffs/DESIGN_FREEZE_AND_HANDOFFS.md`, then read your named file in `handoffs/`. Keep all numerical settings in `code/getConfig.m` so our sections match. The values for indoor loss, interference and power are labeled assumptions until checked against real measurements.
 >
 > **Prisha:** Start the path-loss/shadowing/4-tap fading/AWGN/co-channel-OFDM channel. Use the six scenarios and exact powers in the design file. Return `rxWaveform` and public scenario info to Abhinav; keep true taps/SINR separately for verification. First 20 frames per case, final 500. Send the first working channel and scenario table by 20 Oct.
 >

@@ -1,6 +1,6 @@
 %RUNLOKESHTX Reproducible transmitter figures and numerical summary.
 cfg=getConfig();
-outDir=fullfile(fileparts(mfilename('fullpath')),'..','figures');
+outDir=fullfile(fileparts(mfilename('fullpath')),'..','lokesh','figures');
 if ~isfolder(outDir), mkdir(outDir); end
 rates=txLinkRates(cfg);
 disp(rates);

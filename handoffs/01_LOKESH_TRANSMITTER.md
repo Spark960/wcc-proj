@@ -4,7 +4,7 @@ Read `00_GROUP_PLAN.md` and `DESIGN_FREEZE_AND_HANDOFFS.md` first. You own the *
 
 ## Deliverables
 
-1. `config.m` or `getConfig.m`: all system settings with units and RNG seed(s).
+1. Maintain the existing `code/getConfig.m` as the one source of system settings, units and RNG seeds.
 2. `makeFrame.m` and `transmitFrame.m` (names may vary): payload/framing/CRC and OFDM waveform generation.
 3. A documented adaptive modulation selection function or call site.
 4. Spectrum, resource-map and frame-format figures; transmitter parameter/EIRP/nominal-throughput table.
@@ -13,8 +13,8 @@ Read `00_GROUP_PLAN.md` and `DESIGN_FREEZE_AND_HANDOFFS.md` first. You own the *
 
 ## Implementation steps
 
-1. **Freeze interfaces with Prisha and Abhinav.** Decide the exact 64 FFT-bin indices, DC/guard bins, four pilot bins, pilot symbols, 16-sample CP, preamble length, symbol order and frame metadata structure. Write these in the config comments and a small frame diagram. Do this before separate coding.
-2. **Make payloads reproducible.** Choose a fixed payload byte string or seeded pseudo-random bits. Keep each frame's original payload bits and frame ID. If registration-number-derived bits are chosen, document the exact character encoding, bit order and framing; otherwise a seeded payload is sufficient for this question.
+1. **Share the fixed interface with Prisha and Abhinav.** The 64 FFT-bin indices, guards/DC, four pilot bins/values, 16-sample CP, preamble, symbol order and frame metadata are already in `code/getConfig.m`, `code/README.md` and `handoffs/DESIGN_FREEZE_AND_HANDOFFS.md`. Confirm both use these values.
+2. **Keep the payload reproducible.** The implemented baseline uses 96 seeded pseudo-random bytes per frame with seed `3128 + frameId`. Preserve each frame's original payload bits and frame ID for offline metrics. If the group later changes to registration-derived bits, document the exact encoding, bit order and framing before using them.
 3. **Add CRC and framing.** Select a CRC-16 polynomial, initialization, input/reflection convention and output order. Construct preamble + data-bearing OFDM symbols. Include any header needed by the receiver to know frame length and modulation; keep the header robust and document it. The receiver must be able to identify a failed frame through CRC.
 4. **Implement modulation.** Map payload+CRC bits using QPSK, 16-QAM or 64-QAM with a stated normalization. Pad only to complete OFDM symbols; record pad count so Abhinav removes it before CRC/BER calculations.
 5. **Implement OFDM.** Fill agreed data and pilot bins; leave guard/DC bins unused; IFFT each symbol; prepend CP; concatenate with preamble. Output a complex column vector and metadata. Make transmit power and antenna gain explicit RF/link-budget parameters; clearly explain any waveform normalization.
@@ -29,7 +29,7 @@ For each frame send Prisha `txWaveform`, `cfg` and `txMeta`. `txMeta` should con
 
 ## What to write by hand for A
 
-State the objective; draw Tx blocks and frame format; list exact OFDM/modulation/configuration parameters; explain framing, CRC, modulation, pilots, IFFT and CP; show spectrum and resource mapping; calculate EIRP and nominal throughput with units; state how the field dataset informs the link model; explain the adaptive rule. Insert printed figures/screenshots at appropriate places in the scanned assignment. Label assumptions and plots. Write your name and signature on **every** page you handwrite.
+State the objective; draw Tx blocks and frame format; list exact OFDM/modulation/configuration parameters; explain framing, CRC, modulation, pilots, IFFT and CP; show spectrum and resource mapping; calculate EIRP and nominal throughput with units; state how the field dataset informs the link model; explain the adaptive rule. Insert printed figures/screenshots at appropriate places in the scanned assignment. Label assumptions and plots. Ensure **all four names and signatures** appear on every handwritten page.
 
 ## Team-lead checks
 

@@ -10,7 +10,7 @@ runLokeshTx
 
 The commands use the repository's current folder, so they work after cloning to a different computer. If MATLAB's Current Folder is elsewhere, first navigate to the cloned repository root in MATLAB.
 
-`checkLokeshTx` checks the CRC-16 known vector (`123456789` → `29B1`), deterministic waveform generation, configured average transmit power and a zero-impairment OFDM loopback for all three modulation modes. `runLokeshTx` prints the rate/EIRP table and exports `../figures/tx_resource_mapping.png` and `../figures/tx_spectrum.png`.
+`checkLokeshTx` checks the CRC-16 known vector (`123456789` → `29B1`), deterministic waveform generation, configured average transmit power and a zero-impairment OFDM loopback for all three modulation modes. `runLokeshTx` prints the rate/EIRP table and exports `../lokesh/figures/tx_resource_mapping.png` and `../lokesh/figures/tx_spectrum.png`.
 
 ## API for the group
 
@@ -28,7 +28,7 @@ The frame has two identical known preamble OFDM symbols, one QPSK header OFDM sy
 
 The SINR thresholds `[12 23]` dB are **provisional design assumptions**. Abhinav and Soukaryo should tune and justify them from PER results before calling the final configuration validated. `selectTxMode` uses only a **previous-frame** SINR report and defaults to QPSK on the first frame. The actual measured Wi-Fi RSSI dataset is still needed from Soukaryo; no field measurement is fabricated in this transmitter.
 
-`getConfig.m` also contains the agreed *baseline assumptions* for Prisha's channel, the six scenarios, trial count and evaluation targets. They are specified in `DESIGN_FREEZE_AND_HANDOFFS.md`. Adding these fields does **not** mean the channel/receiver/analysis have been implemented.
+`getConfig.m` also contains the agreed *baseline assumptions* for Prisha's channel, the six scenarios, trial count and evaluation targets. They are specified in `handoffs/DESIGN_FREEZE_AND_HANDOFFS.md` at the repository root. Adding these fields does **not** mean the channel/receiver/analysis have been implemented.
 
 ## Integration notes
 
