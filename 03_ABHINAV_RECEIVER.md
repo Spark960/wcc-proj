@@ -1,6 +1,6 @@
 # Abhinav — Question 20C: receiver and metrics
 
-Read `00_GROUP_PLAN.md` first. You own the **entire C sub-question**: synchronization, channel estimation/equalization, adaptive demodulation, payload recovery and CRC/PER measurement. Log received power/SINR, BER/PER, throughput and a latency or outage proxy across all six scenarios.
+Read `00_GROUP_PLAN.md` and `DESIGN_FREEZE_AND_HANDOFFS.md` first. You own the **entire C sub-question**: synchronization, channel estimation/equalization, adaptive demodulation, payload recovery and CRC/PER measurement. Log received power/SINR, BER/PER, throughput and a latency or outage proxy across all six scenarios. Start now with a clean waveform plus an 8-sample prefix; Prisha's full channel can be integrated later.
 
 ## Deliverables
 
@@ -8,16 +8,18 @@ Read `00_GROUP_PLAN.md` first. You own the **entire C sub-question**: synchroniz
 2. Metric functions or results-table code with exact denominators/units.
 3. Receiver constellation and performance plots plus a six-scenario results table.
 4. Notes on synchronization, estimation, equalization, adaptation and limitations.
-5. Your complete handwritten C pages, with **Abhinav and your signature on every page**.
+5. Your complete handwritten C pages. Arrange for **all four names and signatures on every handwritten page** before scanning.
 
 ## Implementation steps
 
 1. **Agree on the frame format with Lokesh.** Obtain preamble samples, pilots, carrier indices, header format, modulation normalization, CRC settings and padding rules. Make these shared protocol settings, not hard-coded guesses.
 2. **Synchronize.** Search for the known preamble (for example by correlation); select the frame start; report failed detection as a frame failure. Demonstrate a received preamble/correlation peak for a representative case. Do not use Prisha's injected delay or truth frame index to choose the start in normal operation.
+   Prisha will include a fixed 8-sample leading delay, but your decoder must **discover** it from the waveform.
 3. **Demodulate OFDM.** Segment symbols, remove CP, FFT, extract pilot/data bins. Estimate complex channel response from known preamble/pilots and interpolate or use a clearly justified simple equalizer. A one-tap frequency-domain equalizer per active bin is a practical baseline. Show at least one raw and one equalized constellation.
 4. **Decode adaptively.** Use the frame header or a documented mode-control rule to know QPSK/16-QAM/64-QAM. For adaptation, estimate channel quality from a prior frame or known pilots and feed a recommended mode to Lokesh for the **next** frame; record the chosen thresholds and default initial mode. Avoid choosing a mode with future/truth information.
 5. **Recover and verify payload.** Undo padding, recover CRC bits, calculate CRC and record packet pass/fail. Compare recovered payload against Lokesh's original bits **only in the evaluation script** to calculate BER; the decoder itself must not receive the original bits.
 6. **Define metrics exactly.** BER = erroneous payload bits / compared payload bits. PER = failed frames / attempted frames; include synchronization/CRC failures. Goodput = correctly delivered payload bits / elapsed simulated transmission time. Received power and SINR must use one stated estimator or clearly labeled diagnostic value. Choose either an outage proxy (e.g. fraction of frames below a declared SINR or successful-delivery threshold) or a latency proxy (e.g. frame airtime with a stated retransmission assumption); label it as a proxy, not an actual network latency measurement.
+   The group has selected expected repeated-transmission airtime `frame duration/(1−PER)` as the latency proxy. For BER, exclude frames without an aligned/known-length payload but count them as PER failures; report the excluded count. Use 20 frames per case for smoke testing and 500 per case for final metrics.
 7. **Run and report.** Produce one row for each `near/middle/edge × low/high interference` case. Include counts as well as ratios so PER=0 is understood as “zero observed failures in N frames.” Show BER/PER/goodput versus location/load or SINR, with axes and units.
 8. **Functional checks.** First decode a no-impairment or very high-SNR frame and verify exact payload/CRC. Then check that worse channel/load usually degrades aggregate performance. If BER/PER behave unexpectedly, check bit ordering, symbol scaling, carrier indices, noise scaling, equalizer and CRC before producing report figures.
 

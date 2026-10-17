@@ -1,6 +1,6 @@
 # Lokesh — Question 20A: transmitter and team lead
 
-Read `00_GROUP_PLAN.md` first. You own the **entire A sub-question**, the shared numerical configuration and final integration. The assignment explicitly requires a complete transmitter with framed traffic, OFDM and adaptive QPSK/16-QAM/64-QAM (or justified equivalent), configurable power/gain/bandwidth, a field-measurement input, Tx plots and throughput/EIRP calculations.
+Read `00_GROUP_PLAN.md` and `DESIGN_FREEZE_AND_HANDOFFS.md` first. You own the **entire A sub-question**, the shared numerical configuration and final integration. The assignment explicitly requires a complete transmitter with framed traffic, OFDM and adaptive QPSK/16-QAM/64-QAM (or justified equivalent), configurable power/gain/bandwidth, a field-measurement input, Tx plots and throughput/EIRP calculations.
 
 ## Deliverables
 
@@ -8,7 +8,7 @@ Read `00_GROUP_PLAN.md` first. You own the **entire A sub-question**, the shared
 2. `makeFrame.m` and `transmitFrame.m` (names may vary): payload/framing/CRC and OFDM waveform generation.
 3. A documented adaptive modulation selection function or call site.
 4. Spectrum, resource-map and frame-format figures; transmitter parameter/EIRP/nominal-throughput table.
-5. Your complete handwritten A pages, with **Lokesh and your signature on every page**.
+5. Your complete handwritten A pages. Arrange for **all four names and signatures on every handwritten page** before scanning.
 6. Main run script, README, merged report and final submissions as team lead.
 
 ## Implementation steps
@@ -19,6 +19,7 @@ Read `00_GROUP_PLAN.md` first. You own the **entire A sub-question**, the shared
 4. **Implement modulation.** Map payload+CRC bits using QPSK, 16-QAM or 64-QAM with a stated normalization. Pad only to complete OFDM symbols; record pad count so Abhinav removes it before CRC/BER calculations.
 5. **Implement OFDM.** Fill agreed data and pilot bins; leave guard/DC bins unused; IFFT each symbol; prepend CP; concatenate with preamble. Output a complex column vector and metadata. Make transmit power and antenna gain explicit RF/link-budget parameters; clearly explain any waveform normalization.
 6. **Set adaptation policy.** Agree with Abhinav how a previous-frame SINR estimate selects the next frame's modulation, including initial mode and thresholds. Do not use the true channel or after-the-fact CRC to label a mode as adaptive. If thresholds are tuned, save the tuning method.
+   The group has fixed QPSK first frame and provisional 12/23 dB cutoffs. Abhinav's final PER/SINR results must justify or replace those cutoffs. Run an actual multi-frame adaptive sequence before making an adaptive-performance claim.
 7. **Use field data meaningfully.** Obtain Soukaryo's original RSSI data and document how its trend calibrates or validates a link parameter. The transmitter section may reference this shared dataset, but Soukaryo owns its collection and detailed comparison.
 8. **Calculate and plot.** Plot occupied subcarriers/pilots and a spectrum with axes/units. Calculate EIRP = transmit power (dBm) + transmit antenna gain (dBi) minus any stated feeder loss (dB). Calculate nominal bit rate from data carriers × bits/carrier ÷ OFDM-symbol time, then account separately for header/preamble/CRC overhead if reporting nominal payload rate. Do not label this as measured goodput.
 
@@ -34,7 +35,7 @@ State the objective; draw Tx blocks and frame format; list exact OFDM/modulation
 
 - Confirm all four sections use the same config, locations, load names, units and final run results.
 - Add required front matter: subject code/name, date, section, group number, all names/registration numbers and contribution table.
-- Check every handwritten page for its writer's name and signature; collect original figure/measurement screenshots.
+- Check every handwritten page for **all four members' names and signatures**; collect original figure/measurement screenshots.
 - Create the **single handwritten PDF by 25 Oct 2026, 5:00 PM**. For the later **1 Nov 2026, 5:00 PM** submission, prepare one project PDF and one ZIP with all experiment files. Use `GroupNumber_QuestionNumber` naming, for example `G01_Q20.pdf`.
 - Open the final PDF(s) and ZIP after export to verify pages, image legibility and that code/data needed to reproduce results are present.
 

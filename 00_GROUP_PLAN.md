@@ -2,6 +2,8 @@
 
 Share this file and the four named instruction files with the group. The source assignment sheets are `ICT3128_Group-Assignment_Project_Questions.pdf` and `ICT3128_Group-Assignment-Writeup_Project_Questions.pdf` in this folder. The assignment sheets take priority if any interpretation here is disputed.
 
+**Shared technical decisions are frozen in `DESIGN_FREEZE_AND_HANDOFFS.md`.** Read that file before implementing B, C or D. `code/getConfig.m` contains the exact numerical baseline. If a field measurement forces a change, update config once and rerun all group results.
+
 ## Ownership
 
 | Member | Complete sub-question | Responsibility |
@@ -11,7 +13,7 @@ Share this file and the four named instruction files with the group. The source 
 | Abhinav | C | Receiver, decoding and performance metrics |
 | Soukaryo | D | Field measurements, validation, analysis and engineering decision |
 
-Each member writes their **entire assigned sub-question** by hand. Every handwritten page must have that student's name and signature. Lokesh checks all sections, adds the assignment details and contribution table, scans/combines the pages, and submits.
+Each member writes their **entire assigned sub-question** by hand. The write-up PDF says **each student must write their name and signature on every page**. To meet that literal wording safely, have **all four members put their name and signature on every handwritten page**, including pages written by another member. Lokesh checks all sections, adds the assignment details and contribution table, scans/combines the pages, and submits.
 
 ## Project objective and scope
 
@@ -26,11 +28,11 @@ Build one reproducible MATLAB end-to-end link: **framed OFDM transmitter → pat
 | Modulations | QPSK, 16-QAM, 64-QAM | Adaptive selection; document thresholds |
 | Payload | Fixed known byte sequence or seeded pseudo-random bits | Save seed and payload length |
 | Error check | CRC-16 | Save polynomial, init, bit order |
-| Frames | At least 100 per scenario for first run | Report actual count; increase only if needed to resolve uncertainty |
-| Locations | Near, middle, edge | Record measured labels/distances/obstructions |
-| Load conditions | Low and high co-channel interference | Six total scenario combinations |
+| Frames | 20 per scenario smoke run; 500 per scenario final run | Report counts and PER uncertainty |
+| Locations | Near 2 m, middle 8 m, edge 20 m baseline | Record actual measured distances/obstructions |
+| Load conditions | Low −110 dBm and high −80 dBm co-channel OFDM interference | Six total scenario combinations |
 | Antennas | 1×1 | MIMO is optional |
-| Bandwidth | Configurable; propose 20 MHz | Set sample rate and symbol time consistently |
+| Bandwidth | Configurable; 20 MHz baseline | Sample rate follows bandwidth in config |
 
 These are **group design choices**, not values given by the assignment. If a toolbox or model constraint requires changing them, update this table, code and all four write-ups together.
 
