@@ -35,3 +35,79 @@ The SINR thresholds `[12 23]` dB are **provisional design assumptions**. Abhinav
 - Prisha should accept `txWaveform` and `cfg`, apply the channel and return a received waveform. She may retain `txMeta` for truth/metrics, but should not provide its payload bits to Abhinav's decoder.
 - Abhinav can synchronize with the repeated preamble, use the known preamble and pilots to estimate/equalize the channel, decode the robust QPSK header, then use its mode/length fields to decode payload and CRC. `txIdealLoopback.m` is only a transmitter functional check: it knows the frame boundary and uses one flat pilot gain, so it is **not** the project receiver.
 - The exact use of 20 MHz, Tx power and RF channel in the real Wi-Fi measurement must be documented. The simulated transmitter is a generic OFDM link, not a claim that the phone or access point implements this exact waveform.
+
+## Channel implementation and validation
+
+`channelScenarios(cfg)` draws shadowing once per location using seed
+`cfg.channelSeed + 10000 + locationIndex`. Its `shadowingDb` field is shared
+by both loads and remains fixed when the frame seed changes. Custom scenarios
+must supply this field. Change `cfg.channelSeed` for a different reproducible run.
+
+Frame seeds start at `cfg.channelSeed + 100000*locationIndex`; the validation
+runner adds `frameIndex - 1`. Low/high loads share fading and noise realizations
+for matched comparisons. The default 500-frame runs fit within these ranges.
+
+`channelOfdmInterference` uses a separate stream at `frameSeed + 1000000`,
+independent random QPSK data, configured OFDM carriers/pilots and cyclic prefix.
+It crops continuous traffic at a random offset of 1–79 samples for the default
+80-sample symbol, then normalizes the retained samples to the specified
+receiver-input power. Load represents interference power, not MAC scheduling.
+This is a custom OFDM waveform, not standards-compliant WLAN. `-Inf` disables it.
+
+Run from the repository root:
+
+```matlab
+addpath(fullfile(pwd,'code'))
+checkLokeshTx
+checkChannelIntegration
+runChannelValidation(20)
+% After checking the smoke results:
+% runChannelValidation(500)
+```
+
+The checks cover repeatability, fixed shadowing with varying fading, matched
+load realizations, interference power, cyclic prefix and null subcarriers.
+`results/channel_validation_results.csv` and the three channel PNGs were
+replaced with the user's MATLAB Online export from `runChannelValidation(500)`.
+The imported table contains six scenarios with 500 frames each, identical
+shadowing for the two loads at each location, and lower SINR under high load.
+The CSV and PNG files were inspected locally; no MATLAB console/test log was
+included in the export, so successful execution of the separate check scripts
+has not been independently verified. These remain channel diagnostics, not
+receiver BER/PER results. The waveform PNG has a minor overlap between its
+lower title and scientific-notation axis label; adjust layout before report use.
+
+## Part C receiver
+
+`receiveFrame(rxWaveform,cfg)` performs timing, training-based channel estimation,
+pilot gain correction, header validation, mode-aware demapping and payload CRC.
+It receives no `txMeta` or true channel parameters. `rxDemap` shares the exact
+constellation labeling with `txQamMap`. `checkReceiver` covers clean recovery,
+unknown prefixes/gain, multipath, AWGN and damaged/truncated packets.
+
+In MATLAB Online, upload the new receiver ZIP and extract into a fresh directory:
+
+```matlab
+unzip('wcc_receiver_updated.zip','wcc_receiver')
+cd('wcc_receiver')
+addpath(fullfile(pwd,'code'))
+runReceiverProject
+```
+
+This runs functional checks, a 20-frame-per-case smoke run, 100-frame-per-case
+fixed-mode calibration with separate seeds, and final 500-frame-per-case runs
+for three fixed modes and the adaptive policy. It saves per-frame CSVs, summary
+CSVs, MAT configuration/data and plots in `results/receiver/<run>/`, records a
+console diary, and packages `wcc_receiver_results.zip`. Calibration changes only
+the run-local configuration; the selected configuration is saved with results.
+Final adaptive results are under `results/receiver/final/`. The extra fixed-mode
+runs support assessing adaptation rather than assuming it helps. If any check
+fails, the runner stops and retains the diary for diagnosis.
+
+Status: the corrected MATLAB Online export is imported under `results/receiver`.
+The latest diary segment reports passing checks and completed final evaluation;
+older failed attempts remain in the combined raw diary. CSV metrics were
+reconciled with per-frame data and final PNGs inspected. Selected thresholds are
+40/44 dB. Only near-low meets both low-load reliability/goodput targets (1/3
+locations); see `abhinav/PART_C_WRITEUP.md` for actual results and limitations.
+The earlier export is archived under `results/receiver_diagnostic_before_timing_fix`.
