@@ -15,8 +15,10 @@ for k=1:numel(required)
     assert(isfield(cfg,required{k}), 'Missing cfg field: %s', required{k});
 end
 assert(isfield(scenario,'distanceM') && isfield(scenario,'obstacleLossDb') && ...
-    isfield(scenario,'interferencePowerDbm') && isfield(scenario,'seed'), ...
-    'Scenario must contain distanceM, obstacleLossDb, interferencePowerDbm and seed.');
+    isfield(scenario,'interferencePowerDbm') && isfield(scenario,'seed') && ...
+    isfield(scenario,'shadowingDb'), ...
+    'Use channelScenarios: scenario needs distanceM, obstacleLossDb, interferencePowerDbm, seed and shadowingDb.');
+validateattributes(scenario.shadowingDb,{'numeric'},{'scalar','real','finite'});
 assert(cfg.sampleRateHz==cfg.bandwidthHz, 'Baseline expects sample rate = bandwidth.');
 assert(max(cfg.channelTapDelaysSamples)<cfg.cpLength, ...
     'Maximum channel delay should be less than the OFDM cyclic prefix.');
@@ -28,7 +30,7 @@ c = 299792458;
 d0 = cfg.referenceDistanceM;
 fsplDb = 20*log10(4*pi*d0*cfg.centerFrequencyHz/c);
 pathLossDb = fsplDb + 10*cfg.pathLossExponent*log10(max(scenario.distanceM,d0)/d0);
-shadowDb = cfg.shadowSigmaDb*randn(stream,1,1);
+shadowDb = scenario.shadowingDb;
 % Received signal power relative to transmit waveform: antenna gains and feeder
 % loss are included once in the RF link budget; txWaveform already has Tx power.
 largeScaleLossDb = pathLossDb + shadowDb + scenario.obstacleLossDb ...
@@ -57,15 +59,10 @@ kB=1.380649e-23; temperatureK=290;
 noisePowerW=kB*temperatureK*cfg.bandwidthHz*10^(cfg.noiseFigureDb/10);
 noise=sqrt(noisePowerW/2)*(randn(stream,size(faded))+1i*randn(stream,size(faded)));
 
-% Independent in-band co-channel interference at the specified receiver-input
-% power. A complex Gaussian process is used as a tractable wideband interferer
-% proxy; this is not a standards-compliant second WLAN transmitter waveform.
-interferencePowerW=0;
-interference=complex(zeros(size(faded)));
-if isfinite(scenario.interferencePowerDbm)
-    interferencePowerW=10^((scenario.interferencePowerDbm-30)/10);
-    interference=sqrt(interferencePowerW/2)*(randn(stream,size(faded))+1i*randn(stream,size(faded)));
-end
+% Independent continuous OFDM traffic, asynchronously cropped and scaled at
+% the receiver input. This custom waveform is not a standards-compliant WLAN.
+[interference,interfererInfo]=channelOfdmInterference( ...
+    numel(faded),cfg,scenario.interferencePowerDbm,scenario.seed+1000000);
 rxWaveform=faded+noise+interference;
 
 signalPowerW=mean(abs(faded).^2);
@@ -82,6 +79,7 @@ info.eirpDbm=cfg.txPowerDbm+cfg.txAntennaGainDbi-cfg.feederLossDb;
 info.predictedReceivedPowerDbm=info.eirpDbm+cfg.rxAntennaGainDbi-pathLossDb-shadowDb-scenario.obstacleLossDb;
 info.noisePowerDbm=10*log10(noisePowerW/1e-3);
 info.interferenceTargetDbm=scenario.interferencePowerDbm;
+info.interferer=interfererInfo;
 info.signalPowerW=signalPowerW;
 info.measuredSignalPowerDbm=10*log10(max(signalPowerW,realmin)/1e-3);
 info.measuredNoisePowerW=measuredNoiseW;
