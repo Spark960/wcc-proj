@@ -4,6 +4,8 @@ Start with the [group plan](handoffs/00_GROUP_PLAN.md) and [frozen technical dec
 
 **Current implementation status:** The transmitter, channel and receiver pass local MATLAB R2026b checks and full six-case evaluations. At the assumed 15 dBm baseline, only **1/3** low-load locations meets the group's PER/goodput targets. Soukaryo's real field RSSI evidence and the 10/15/20 dBm engineering comparison are still required. See the [dated status and test record](CURRENT_STATUS.md), [copy-ready A/B/C/D handwritten draft](report/HANDWRITTEN_COPY_DRAFT.md), [receiver outputs](results/receiver/README.md) and [run instructions](code/README.md). Do not describe simulated results as field measurements or claim the current configuration meets the full target.
 
+For the phone survey and a clean handoff to a new chat, use the [field measurement instructions](handoffs/05_FIELD_MEASUREMENT_AND_NEXT_CHAT.md).
+
 ## Run the existing transmitter from the repository root
 
 ```matlab
