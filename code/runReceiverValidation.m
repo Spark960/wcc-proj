@@ -88,6 +88,7 @@ for p=1:4
     xticklabels(strrep(summary.Scenario,'_',' ')); xtickangle(25);
     ylabel(labels{p}); grid on;
 end
+printable(f);
 exportgraphics(f,fullfile(out,'receiver_performance.png'),'Resolution',180); close(f);
 if ~isempty(example)
     f=figure('Visible','off','Color','w','Position',[100 100 1100 750]);
@@ -99,12 +100,20 @@ if ~isempty(example)
     title('Before equalization'); xlabel('I'); ylabel('Q'); axis equal; grid on;
     nexttile; plot(real(example.equalizedSymbols),imag(example.equalizedSymbols),'.');
     title(['After equalization: ' example.mode]); xlabel('I'); ylabel('Q'); axis equal; grid on;
+    printable(f);
     exportgraphics(f,fullfile(out,'receiver_example.png'),'Resolution',180); close(f);
 end
 f=figure('Visible','off','Color','w');
 plot(frames.TruthSINR_dB,frames.EstimatedSINR_dB,'.'); hold on;
 limits=[min(frames.TruthSINR_dB) max(frames.TruthSINR_dB)]; plot(limits,limits,'k--');
 xlabel('Offline diagnostic SINR (dB)'); ylabel('Training-based effective SINR (dB)'); grid on;
+printable(f);
 exportgraphics(f,fullfile(out,'receiver_sinr_validation.png'),'Resolution',180); close(f);
 disp(summary);
+end
+
+function printable(f)
+% Make exports legible regardless of the local MATLAB theme.
+set(findall(f,'Type','axes'),'Color','w','XColor','k','YColor','k');
+set(findall(f,'Type','text'),'Color','k');
 end

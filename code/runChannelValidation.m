@@ -30,12 +30,22 @@ writetable(results,fullfile(outDir,'channel_validation_results.csv'));
 f=figure('Visible','off','Color','w');
 subplot(2,1,1); plot(real(exampleTx(1:min(300,end)))); grid on; title('Transmitter output (real part)'); xlabel('Sample'); ylabel('sqrt(W)');
 subplot(2,1,2); plot(real(exampleRx(1:min(308,end)))); grid on; title(sprintf('Received waveform: %s (8-sample leading delay)',exampleInfo.scenarioName)); xlabel('Sample'); ylabel('sqrt(W)');
+printable(f);
 exportgraphics(f,fullfile(outDir,'tx_channel_waveform.png'),'Resolution',180); close(f);
 f=figure('Visible','off','Color','w');
 bar(categorical(results.Scenario),[results.MeanPredictedRxPower_dBm results.MeanMeasuredRxPower_dBm]); grid on; ylabel('Received signal power (dBm)'); legend('Link-budget prediction','Simulated faded waveform','Location','best'); title('Channel integration: received power'); set(gca,'Color','w','XColor','k','YColor','k');
+printable(f);
 exportgraphics(f,fullfile(outDir,'received_power_comparison.png'),'Resolution',180); close(f);
 f=figure('Visible','off','Color','w'); bar(categorical(results.Scenario),results.MeanSINR_dB); grid on; ylabel('Diagnostic SINR (dB)'); title('Channel integration: estimated truth SINR'); set(gca,'Color','w','XColor','k','YColor','k');
+printable(f);
 exportgraphics(f,fullfile(outDir,'sinr_by_scenario.png'),'Resolution',180); close(f);
 fprintf('Saved integrated channel results and plots under %s\n',outDir);
 fprintf('These are channel-model diagnostics, not receiver BER/PER results.\n');
+end
+
+function printable(f)
+% Make exports legible regardless of the local MATLAB theme.
+set(findall(f,'Type','axes'),'Color','w','XColor','k','YColor','k');
+set(findall(f,'Type','text'),'Color','k');
+set(findall(f,'Type','legend'),'Color','w','TextColor','k');
 end

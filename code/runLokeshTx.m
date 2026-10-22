@@ -13,6 +13,8 @@ stem(cfg.pilotBins,1.3*ones(size(cfg.pilotBins)),'filled','DisplayName','Pilots'
 xlabel('Subcarrier index relative to DC');ylabel('Allocation');
 title('64-point OFDM resource mapping');ylim([0 1.6]);grid on;legend('Location','best');
 set(gca,'Color','w','XColor','k','YColor','k');
+set(findall(f1,'Type','text'),'Color','k');
+set(findall(f1,'Type','legend'),'Color','w','TextColor','k');
 exportgraphics(f1,fullfile(outDir,'tx_resource_mapping.png'),'Resolution',180);close(f1);
 [txWaveform,meta]=transmitFrame(1,'QPSK',cfg);
 N=8192;
@@ -23,6 +25,7 @@ f2=figure('Visible','off','Color','w');
 plot(freqMHz,Pdb);grid on;xlabel('Frequency offset (MHz)');ylabel('Relative power (dB)');
 title('Transmitted framed OFDM spectrum');ylim([-100 5]);
 set(gca,'Color','w','XColor','k','YColor','k');
+set(findall(f2,'Type','text'),'Color','k');
 exportgraphics(f2,fullfile(outDir,'tx_spectrum.png'),'Resolution',180);close(f2);
 fprintf('Frame 1: %d payload bits, %d payload symbols, %d samples, %.3f us, mean power %.6g W\n', ...
     meta.payloadBitCount,meta.nPayloadSymbols,numel(txWaveform),1e6*meta.frameDurationS,mean(abs(txWaveform).^2));

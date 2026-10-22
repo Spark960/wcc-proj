@@ -104,11 +104,9 @@ smoke output is under `results/receiver/adaptive_smoke_20/`. The extra fixed-mod
 runs support assessing adaptation rather than assuming it helps. If any check
 fails, the runner stops and retains the diary for diagnosis.
 
-Status: the corrected MATLAB Online export is imported under `results/receiver`.
-The imported diary reports passing checks and completed final evaluation;
-older failed attempts remain in that imported diary. A fresh local runner invocation
-starts a new diary. CSV metrics were
-reconciled with per-frame data and final PNGs inspected. Selected thresholds are
+Status: `runReceiverProject` completed locally in MATLAB R2026b on 22 October 2026.
+The fresh diary, CSVs, MAT files and plots are under `results/receiver`; the ZIP
+passed an integrity check. Selected thresholds are
 40/44 dB. Only near-low meets both low-load reliability/goodput targets (1/3
 locations); see `abhinav/PART_C_WRITEUP.md` for actual results and limitations.
 The earlier export is archived under `results/receiver/archive_before_timing_fix`.
