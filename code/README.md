@@ -28,12 +28,12 @@ The frame has two identical known preamble OFDM symbols, one QPSK header OFDM sy
 
 The SINR thresholds `[12 23]` dB are **provisional design assumptions**. Abhinav and Soukaryo should tune and justify them from PER results before calling the final configuration validated. `selectTxMode` uses only a **previous-frame** SINR report and defaults to QPSK on the first frame. The actual measured Wi-Fi RSSI dataset is still needed from Soukaryo; no field measurement is fabricated in this transmitter.
 
-`getConfig.m` also contains the agreed *baseline assumptions* for Prisha's channel, the six scenarios, trial count and evaluation targets. They are specified in `handoffs/DESIGN_FREEZE_AND_HANDOFFS.md` at the repository root. Adding these fields does **not** mean the channel/receiver/analysis have been implemented.
+`getConfig.m` contains the agreed baseline assumptions for the channel, six scenarios, trial counts and evaluation targets. They are specified in `handoffs/DESIGN_FREEZE_AND_HANDOFFS.md` at the repository root. The transmitter, channel and receiver are implemented; field measurements and the final engineering decision remain outstanding.
 
 ## Integration notes
 
-- Prisha should accept `txWaveform` and `cfg`, apply the channel and return a received waveform. She may retain `txMeta` for truth/metrics, but should not provide its payload bits to Abhinav's decoder.
-- Abhinav can synchronize with the repeated preamble, use the known preamble and pilots to estimate/equalize the channel, decode the robust QPSK header, then use its mode/length fields to decode payload and CRC. `txIdealLoopback.m` is only a transmitter functional check: it knows the frame boundary and uses one flat pilot gain, so it is **not** the project receiver.
+- `applyChannel` accepts the transmit waveform, configuration and scenario, and returns the received waveform with a separate diagnostic truth structure. `receiveFrame` uses only the received waveform and configuration.
+- `receiveFrame` synchronizes with the preamble, estimates and equalizes the channel, decodes the header and payload, and checks CRC. `txIdealLoopback.m` remains a transmitter-only functional check.
 - The exact use of 20 MHz, Tx power and RF channel in the real Wi-Fi measurement must be documented. The simulated transmitter is a generic OFDM link, not a claim that the phone or access point implements this exact waveform.
 
 ## Channel implementation and validation
@@ -85,11 +85,9 @@ It receives no `txMeta` or true channel parameters. `rxDemap` shares the exact
 constellation labeling with `txQamMap`. `checkReceiver` covers clean recovery,
 unknown prefixes/gain, multipath, AWGN and damaged/truncated packets.
 
-In MATLAB Online, upload the new receiver ZIP and extract into a fresh directory:
+From this repository root in MATLAB:
 
 ```matlab
-unzip('wcc_receiver_updated.zip','wcc_receiver')
-cd('wcc_receiver')
 addpath(fullfile(pwd,'code'))
 runReceiverProject
 ```
@@ -98,16 +96,19 @@ This runs functional checks, a 20-frame-per-case smoke run, 100-frame-per-case
 fixed-mode calibration with separate seeds, and final 500-frame-per-case runs
 for three fixed modes and the adaptive policy. It saves per-frame CSVs, summary
 CSVs, MAT configuration/data and plots in `results/receiver/<run>/`, records a
-console diary, and packages `wcc_receiver_results.zip`. Calibration changes only
+console diary in `results/receiver/receiver_validation_log.txt`, and packages
+`results/receiver_results.zip`. Calibration changes only
 the run-local configuration; the selected configuration is saved with results.
-Final adaptive results are under `results/receiver/final/`. The extra fixed-mode
+Final adaptive results are under `results/receiver/adaptive_500/`. The 20-frame
+smoke output is under `results/receiver/adaptive_smoke_20/`. The extra fixed-mode
 runs support assessing adaptation rather than assuming it helps. If any check
 fails, the runner stops and retains the diary for diagnosis.
 
 Status: the corrected MATLAB Online export is imported under `results/receiver`.
-The latest diary segment reports passing checks and completed final evaluation;
-older failed attempts remain in the combined raw diary. CSV metrics were
+The imported diary reports passing checks and completed final evaluation;
+older failed attempts remain in that imported diary. A fresh local runner invocation
+starts a new diary. CSV metrics were
 reconciled with per-frame data and final PNGs inspected. Selected thresholds are
 40/44 dB. Only near-low meets both low-load reliability/goodput targets (1/3
 locations); see `abhinav/PART_C_WRITEUP.md` for actual results and limitations.
-The earlier export is archived under `results/receiver_diagnostic_before_timing_fix`.
+The earlier export is archived under `results/receiver/archive_before_timing_fix`.

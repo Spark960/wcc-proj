@@ -4,7 +4,7 @@ Status: updated from the corrected MATLAB Online export. The latest run's
 transmitter, channel and receiver checks passed and all eight run tables were
 reconciled against their per-frame logs. The full diary retains older attempts;
 its latest run completed without a logged error. The earlier timing-bug results
-are preserved separately under `results/receiver_diagnostic_before_timing_fix/`.
+are preserved separately under `results/receiver/archive_before_timing_fix/`.
 Use the numerical tables below for the handwritten Part C contribution.
 
 ## 1. Objective and receiver architecture
@@ -230,17 +230,17 @@ recovery, not an unbiased summary of all channel realizations.
 
 Insert these actual exported figures:
 
-1. `results/receiver/final/receiver_example.png`: correlation, estimated channel,
+1. `results/receiver/adaptive_500/receiver_example.png`: correlation, estimated channel,
    and before/after equalization for the first successful QPSK frame. It is an
    example, not the constellation for all adaptive frames.
-2. `results/receiver/final/receiver_performance.png`: six-case BER, PER, goodput
+2. `results/receiver/adaptive_500/receiver_performance.png`: six-case BER, PER, goodput
    and latency proxy. Small BER values are better read from the table.
-3. `results/receiver/final/receiver_sinr_validation.png`: effective training SINR
+3. `results/receiver/adaptive_500/receiver_sinr_validation.png`: effective training SINR
    versus offline diagnostic SINR, including estimation outliers.
 
 ### Source files and audit
 
-The final numerical source is `results/receiver/final/receiver_summary.csv`;
+The final numerical source is `results/receiver/adaptive_500/receiver_summary.csv`;
 `receiver_frames.csv` contains all 3000 attempts. Configuration, data and example
 samples are retained in `receiver_run.mat`. Fixed-mode comparisons use the
 corresponding `fixed_QPSK`, `fixed_16QAM` and `fixed_64QAM` summary files.
