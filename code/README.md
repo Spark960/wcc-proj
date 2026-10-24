@@ -110,3 +110,7 @@ passed an integrity check. Selected thresholds are
 40/44 dB. Only near-low meets both low-load reliability/goodput targets (1/3
 locations); see `abhinav/PART_C_WRITEUP.md` for actual results and limitations.
 The earlier export is archived under `results/receiver/archive_before_timing_fix`.
+
+## Matched power study (24 October 2026)
+
+From the repository root in MATLAB R2026b, run `addpath(fullfile(pwd,'code')); runPowerStudy(500); plotPowerStudy`. This checks the transmitter, channel and receiver, then evaluates 10/15/20 dBm with fixed QPSK, 16-QAM, 64-QAM and the calibrated 40/44 dB adaptive rule over six scenarios. The completed result and interpretation are in `results/receiver/power_study/README.md` and `power_study_500.csv` there. The 15 dBm baseline configuration in `getConfig.m` is retained for reproducibility; the 20 dBm fixed-QPSK result is a tested fallback, not a validated 3/3 design.

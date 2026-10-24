@@ -1,0 +1,25 @@
+location,sample,approximate_distance_m,rssi_dBm,timestamp_local,app,phone_model,ap_label,band_ghz,channel,obstacles,notes
+near,1,,-67,2026-10-24 20:15:50 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+near,2,,-67,2026-10-24 20:16:26 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+near,3,,-67,2026-10-24 20:16:37 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+near,4,,-67,2026-10-24 20:16:56 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+near,5,,-67,2026-10-24 20:17:06 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+near,6,,-73,2026-10-24 20:17:27 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+near,7,,-73,2026-10-24 20:17:35 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,1,,-75,2026-10-24 20:17:42 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,2,,-71,2026-10-24 20:18:12 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,3,,-71,2026-10-24 20:18:20 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,4,,-71,2026-10-24 20:18:28 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,5,,-71,2026-10-24 20:18:36 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,6,,-71,2026-10-24 20:18:43 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,7,,-71,2026-10-24 20:18:50 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,8,,-74,2026-10-24 20:18:57 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,9,,-74,2026-10-24 20:19:05 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,10,,-74,2026-10-24 20:19:12 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+middle,11,,-74,2026-10-24 20:19:20 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+edge,1,,-94,2026-10-24 20:19:52 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+edge,2,,-94,2026-10-24 20:19:59 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+edge,3,,-94,2026-10-24 20:20:05 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+edge,4,,-94,2026-10-24 20:20:12 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+edge,5,,-94,2026-10-24 20:20:19 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching
+edge,6,,-94,2026-10-24 20:20:25 IST,WiFi Analyzer,,AP1,2.4,7,,Original AP-list export; BSSID d8:38:0d:1b:40:51; repeated RSSI may reflect scan caching

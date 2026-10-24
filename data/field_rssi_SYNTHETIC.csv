@@ -1,0 +1,31 @@
+location,sample,approximate_distance_m,rssi_dBm,timestamp_local,app,phone_model,ap_label,band_ghz,channel,obstacles,notes
+near,1,,-52,2026-10-24 19:34:28 IST,,,AP1,2.4,8,,OBSERVED from user-provided scan; BSSID d8:38:0d:1b:40:c1
+near,2,,-53,2026-10-24 19:34:33 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+near,3,,-51,2026-10-24 19:34:38 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+near,4,,-55,2026-10-24 19:34:43 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+near,5,,-52,2026-10-24 19:34:48 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+near,6,,-54,2026-10-24 19:34:53 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+near,7,,-50,2026-10-24 19:34:58 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+near,8,,-53,2026-10-24 19:35:03 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+near,9,,-56,2026-10-24 19:35:08 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+near,10,,-52,2026-10-24 19:35:13 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+middle,1,,-74,2026-10-24 19:36:14 IST,,,AP1,2.4,8,,OBSERVED from user-provided scan; BSSID d8:38:0d:1b:40:c1
+middle,2,,-76,2026-10-24 19:36:19 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+middle,3,,-72,2026-10-24 19:36:24 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+middle,4,,-75,2026-10-24 19:36:29 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+middle,5,,-73,2026-10-24 19:36:34 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+middle,6,,-77,2026-10-24 19:36:39 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+middle,7,,-74,2026-10-24 19:36:44 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+middle,8,,-71,2026-10-24 19:36:49 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+middle,9,,-75,2026-10-24 19:36:54 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+middle,10,,-73,2026-10-24 19:36:59 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+edge,1,,-87,2026-10-24 19:38:13 IST,,,AP1,2.4,8,,OBSERVED from user-provided scan; BSSID d8:38:0d:1b:40:c1
+edge,2,,-89,2026-10-24 19:38:18 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+edge,3,,-86,2026-10-24 19:38:23 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+edge,4,,-91,2026-10-24 19:38:28 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+edge,5,,-88,2026-10-24 19:38:33 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+edge,6,,-85,2026-10-24 19:38:38 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+edge,7,,-90,2026-10-24 19:38:43 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+edge,8,,-87,2026-10-24 19:38:48 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+edge,9,,-92,2026-10-24 19:38:53 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured
+edge,10,,-88,2026-10-24 19:38:58 IST,,,AP1,2.4,8,,SYNTHETIC prediction; not measured

@@ -1,0 +1,7 @@
+# Field data used in Question 20
+
+`field_rssi.csv` is the latest **real** phone export dataset: 7 near, 11 middle and 6 far timestamped rows for AP1 BSSID `d8:38:0d:1b:40:51`, 2.4 GHz channel 7. It was extracted without changing RSSI values or timestamps from the original user paste in `raw/wifi_ap_exports_2026-10-24_near_middle_edge.txt` using `code/extractFieldRssi.py`. See `field_rssi_source_audit.md` for all values, selection rationale and scan-cache limitations. Distances, obstacles and phone model are blank because they were not supplied. MATLAB's `plotPowerStudy` uses these 24 rows for the descriptive field trend comparison.
+
+`field_rssi_OBSERVED_PARTIAL.csv` is an earlier three-observation dataset for a **different** BSSID `...40:c1`, which is absent from the far section of the newer exports. It must not be combined with `field_rssi.csv`. `field_rssi_TEMPLATE.csv` is an empty schema. `field_rssi_SYNTHETIC.csv` contains generated example values/timestamps for workflow testing; it is **not** measured data and is excluded from the report, plots and submission ZIP.
+
+The assignment requires at least one mobile-app field input and a comparison with one simulated trend. The group's original ten-per-location protocol was not achieved for this one BSSID (7/11/6 rows), and many values repeat. The means are descriptive averages of exported rows, not independent-sample estimates. No confidence interval or absolute calibration is claimed.

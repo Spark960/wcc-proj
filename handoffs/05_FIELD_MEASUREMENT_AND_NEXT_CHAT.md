@@ -1,5 +1,7 @@
 # Field RSSI measurement and next-chat handoff
 
+> Historical handoff from 22 October. A later 24 October export supplied 24 real AP-list rows for one BSSID across near/middle/far (7/11/6); the matched 10/15/20 dBm MATLAB study is complete. The assignment PDF does not mandate the ten-per-location count proposed below. For current results and assembly, use `CURRENT_STATUS.md`, `data/field_rssi.csv`, `data/field_rssi_source_audit.md`, `report/HANDWRITTEN_COPY_DRAFT.md`, and `report/FINAL_ASSEMBLY_GUIDE.md`.
+
 ## Project state at handoff (22 October 2026)
 
 The repository is `wcc-proj`, branch `main`. The last published commit before this handoff is `e4de1c4`. Transmitter, six-case channel and receiver are implemented. MATLAB R2026b functional checks and the full 500-frame-per-case baseline run passed. The adaptive 15 dBm baseline meets the group's low-load PER <=5% and goodput >=5 Mbps targets at only **1 of 3** locations. See `CURRENT_STATUS.md`, `report/HANDWRITTEN_COPY_DRAFT.md`, `results/receiver/adaptive_500/receiver_summary.csv`, and `results/channel_validation_results.csv`. Real field RSSI measurements and the matched 10/15/20 dBm power study remain outstanding. Do not fill D with invented readings or call the 15 dBm setting final.
